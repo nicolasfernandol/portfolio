@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio di Nicolas Fernando Larrondo — Designer e Developer">
+  <title>Nicolas Fernando Larrondo — Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar">
+    <div class="navbar__logo">Nicolas Fernando Larrondo</div>
+    <nav class="navbar__links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="home">
+    <div class="hero__content">
+      <p class="hero__greeting">Ciao, sono</p>
+      <h1 class="hero__name">Nicolas Fernando Larrondo</h1>
+      <p class="hero__role">Designer &amp; Developer</p>
+      <a href="#projects" class="btn">Vedi i miei lavori</a>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="section-title">About</h2>
+      <div class="about__grid">
+        <div class="about__text">
+          <p>
+            Sono Nicolas, un designer con passione per il codice.
+            Mi occupo di visual design, UI/UX e sviluppo frontend.
+          </p>
+          <p>
+            Amo creare esperienze digitali curate nei dettagli,
+            dove estetica e funzionalità lavorano insieme.
+          </p>
+        </div>
+        <div class="about__skills">
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Adobe Suite</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects__grid">
+
+        <article class="project-card" data-gallery='["assets/images/jlow-banner.jpg","assets/images/jlowTRUTHLOGO.jpg","assets/images/jlowds3bg.jpg","assets/images/jlow tg ABB.jpg"]'>
+          <div class="project-card__image">
+            <img src="assets/images/jlow-banner.jpg" alt="Jlow Visual Social Identity">
+          </div>
+          <div class="project-card__info">
+            <h3>Jlow — Visual Social Identity</h3>
+            <p>Identità visiva coerente per i canali social di Jlow: loghi, avatar e banner progettati per Discord, Telegram e piattaforme streaming.</p>
+            <div class="project-card__tags">
+              <span>Branding</span>
+              <span>Adobe Photoshop 2025</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card" data-gallery='["assets/images/VOLANTINOESTERNO2510.jpg", "assets/images/VOLANTINO2501INTERNO.jpg"]'>
+          <div class="project-card__image">
+            <img src="assets/images/bannerpdg.jpg" alt="Profumo di Grano's flyer">
+          </div>
+          <div class="project-card__info">
+            <h3>Profumo di Grano — Volantino</h3>
+            <p>Reimpaginazione del volantino-menù della pizzeria Profumo di Grano: copertina esterna e menù interno progettati per unire identità visiva del locale e chiarezza nella lettura delle proposte.</p>
+            <div class="project-card__tags">
+              <span>Adobe InDesign 2025</span>
+              <span>Adobe Photoshop 2025</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">Contatti</h2>
+      <p class="contact__subtitle">Hai un progetto in mente? Scrivimi.</p>
+      <div class="contact__links">
+        <a href="mailto:larrondo.nicolas.fernando@gmail.com" class="btn">Email</a>
+        <a href="https://wa.me/3898285920" class="btn" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> Nicolas Fernando Larrondo. Tutti i diritti riservati.</p>
+  </footer>
+
+  <!-- ===================== LIGHTBOX ===================== -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox__backdrop"></div>
+    <div class="lightbox__content">
+      <button class="lightbox__close" aria-label="Chiudi">&times;</button>
+      <button class="lightbox__arrow lightbox__arrow--prev" aria-label="Precedente">&#8592;</button>
+      <div class="lightbox__image-wrap">
+        <img class="lightbox__img" src="" alt="">
+      </div>
+      <button class="lightbox__arrow lightbox__arrow--next" aria-label="Successivo">&#8594;</button>
+      <div class="lightbox__info">
+        <h3 class="lightbox__title"></h3>
+        <p class="lightbox__desc"></p>
+        <div class="lightbox__dots"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+
+</body>
+</html>

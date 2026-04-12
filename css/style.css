@@ -1,0 +1,568 @@
+/* ============================================================
+   VARIABILI GLOBALI
+   Definite su :root, accessibili ovunque nel CSS.
+   Modificare questi valori cambia l'intero tema del sito.
+============================================================ */
+:root {
+  --color-bg: #0f0f0f;
+  --color-surface: #1a1a1a;
+  --color-border: #2a2a2a;
+  --color-text: #e8e8e8;
+  --color-text-muted: #888888;
+  --color-accent: #53c7d4;
+
+  --font-main: 'Georgia', serif;
+  --font-mono: 'Courier New', monospace;
+
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+
+  --radius: 4px;
+  --transition: 0.3s ease;
+}
+
+
+/* ============================================================
+   RESET
+   I browser applicano stili di default diversi (margini,
+   padding, dimensioni font). Il reset li azzera tutti per
+   partire da una base uniforme su ogni browser.
+============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* ============================================================
+   UTILITY — CONTAINER
+   Classe riutilizzabile che centra il contenuto e limita
+   la larghezza massima. Usata in ogni sezione.
+============================================================ */
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+
+/* ============================================================
+   UTILITY — BOTTONE
+============================================================ */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.btn:hover {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+
+/* ============================================================
+   UTILITY — TITOLI SEZIONE
+============================================================ */
+.section-title {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-lg);
+}
+
+
+/* ============================================================
+   NAVBAR
+   position: fixed → rimane in cima mentre scorri.
+   top/left/right: 0 → occupa tutta la larghezza in alto.
+   z-index: 100 → sta sopra a tutto il resto.
+============================================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Aggiunta da JS quando si scrolla oltre 20px.
+   backdrop-filter: blur crea un effetto vetro smerigliato
+   sullo sfondo della navbar. */
+.navbar--scrolled {
+  background-color: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.navbar__logo {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+.navbar__links {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.navbar__links a {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  transition: color var(--transition);
+}
+
+.navbar__links a:hover {
+  color: var(--color-text);
+}
+
+
+/* ============================================================
+   HERO
+   height: 100svh → occupa l'intera altezza visibile dello
+   schermo (svh = small viewport height, funziona meglio su
+   mobile rispetto a vh).
+   display: flex + place-items: center → centra il contenuto
+   sia orizzontalmente che verticalmente.
+   padding-top: 60px → compensa la navbar fixed.
+============================================================ */
+.hero {
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-top: 60px;
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.hero__greeting {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-xs);
+}
+
+.hero__name {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: normal;
+  line-height: 1.1;
+  margin-bottom: var(--spacing-xs);
+}
+
+/* clamp(min, preferito, max)
+   Il font si adatta alla larghezza dello schermo:
+   mai sotto 2.5rem, mai sopra 5rem. */
+
+.hero__role {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-md);
+}
+
+
+/* ============================================================
+   ABOUT
+   padding: var(--spacing-xl) 0 → spazio verticale generoso.
+   La sezione è separata da un bordo superiore sottile.
+============================================================ */
+.about {
+  padding: var(--spacing-xl) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+/* CSS Grid con due colonne: la prima occupa 3 frazioni,
+   la seconda 2. gap separa le colonne. */
+.about__grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--spacing-lg);
+  align-items: start;
+}
+
+.about__text p {
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
+}
+
+.about__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+
+/* ============================================================
+   PROJECTS
+============================================================ */
+.projects {
+  padding: var(--spacing-xl) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Grid a 3 colonne. Su schermi piccoli diventa 1 colonna
+   grazie alle media query in fondo. */
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+}
+
+.project-card {
+  border: 1px solid var(--color-border);
+  transition: border-color var(--transition);
+}
+
+.project-card:hover {
+  border-color: var(--color-accent);
+}
+
+.project-card__image {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--color-surface);
+}
+
+/* aspect-ratio: 16/10 → il contenitore mantiene sempre
+   questo rapporto larghezza/altezza, indipendentemente
+   dalla larghezza della colonna. */
+
+.project-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+
+.project-card:hover .project-card__image img {
+  transform: scale(1.04);
+}
+
+.project-card__info {
+  padding: var(--spacing-sm);
+}
+
+.project-card__info h3 {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-bottom: var(--spacing-xs);
+}
+
+.project-card__info p {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project-card__tags span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  padding: 0.2rem 0.5rem;
+}
+
+
+/* ============================================================
+   CONTACT
+============================================================ */
+.contact {
+  padding: var(--spacing-xl) 0;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.contact__subtitle {
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-md);
+}
+
+.contact__links {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+
+/* ============================================================
+   LIGHTBOX
+   position: fixed → copre tutto lo schermo.
+   opacity + pointer-events → la tecnica per nasconderlo
+   senza usare display:none (così le transizioni CSS
+   funzionano correttamente: display non è animabile).
+   Quando ha la classe .is-open diventa visibile.
+============================================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;                  /* top:0 right:0 bottom:0 left:0 in una riga */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;      /* non intercetta click quando è chiuso */
+  transition: opacity var(--transition);
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Lo sfondo scuro semi-trasparente dietro il contenuto */
+.lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.92);
+  cursor: pointer;
+}
+
+/* Il pannello centrale — z-index più alto del backdrop */
+.lightbox__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90vw;
+  max-width: 900px;
+  max-height: 90vh;
+}
+
+/* Contenitore immagine con navigazione frecce */
+.lightbox__image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-height: 65vh;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 65vh;
+  object-fit: contain;
+  display: block;
+}
+
+/* Bottone chiudi (×) in alto a destra */
+.lightbox__close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+.lightbox__close:hover {
+  color: var(--color-text);
+}
+
+/* Frecce navigazione */
+.lightbox__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 1.2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+  z-index: 2;
+}
+
+.lightbox__arrow:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.lightbox__arrow--prev { left: -3.5rem; }
+.lightbox__arrow--next { right: -3.5rem; }
+
+/* Nascondi le frecce se c'è una sola immagine */
+.lightbox__arrow.is-hidden {
+  visibility: hidden;
+}
+
+/* Info sotto l'immagine */
+.lightbox__info {
+  margin-top: var(--spacing-sm);
+  text-align: center;
+}
+
+.lightbox__title {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-bottom: 0.25rem;
+}
+
+.lightbox__desc {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Pallini indicatori per la gallery */
+.lightbox__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: var(--spacing-sm);
+}
+
+.lightbox__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-border);
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.lightbox__dot.is-active {
+  background-color: var(--color-accent);
+}
+
+/* Su mobile le frecce vanno sotto l'immagine */
+@media (max-width: 768px) {
+  .lightbox__arrow {
+    position: static;
+    transform: none;
+  }
+
+  .lightbox__image-wrap {
+    order: 1;
+    width: 100%;
+  }
+
+  .lightbox__content {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-xs);
+  }
+
+  .lightbox__arrow--prev { order: 2; }
+  .lightbox__arrow--next { order: 3; }
+
+  .lightbox__info {
+    order: 4;
+    width: 100%;
+  }
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.footer {
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+
+/* ============================================================
+   MEDIA QUERIES — RESPONSIVE
+   @media (max-width: Xpx) → le regole dentro si applicano
+   solo quando lo schermo è largo al massimo X pixel.
+   Approccio desktop-first: partiamo dal layout grande
+   e adattiamo verso il basso.
+============================================================ */
+@media (max-width: 768px) {
+
+  /* La griglia about diventa a colonna singola */
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* La griglia progetti diventa a colonna singola */
+  .projects__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Il titolo hero si riduce */
+  .hero__name {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Su schermi molto piccoli, la navbar mostra solo
+     il logo e nasconde i link (li aggiungeremo
+     come menu hamburger in JS più avanti) */
+  .navbar__links {
+    display: none;
+  }
+}
