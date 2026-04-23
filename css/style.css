@@ -11,7 +11,8 @@
   --color-text-muted: #888888;
   --color-accent: #53c7d4;
 
-  --font-main: 'Georgia', serif;
+  --font-main: 'Inter', sans-serif;
+  --font-display: 'Playfair Display', serif;
   --font-mono: 'Courier New', monospace;
 
   --spacing-xs: 0.5rem;
@@ -96,14 +97,27 @@ a {
 
 /* ============================================================
    UTILITY — TITOLI SEZIONE
+   display: flex + ::after → crea una linea decorativa
+   che si estende fino al bordo del container.
+   flex: 1 fa sì che la linea occupi tutto lo spazio restante.
 ============================================================ */
 .section-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   font-size: 0.75rem;
   font-family: var(--font-mono);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-accent);
   margin-bottom: var(--spacing-lg);
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border);
 }
 
 
@@ -148,6 +162,7 @@ a {
 }
 
 .navbar__links a {
+  position: relative;
   font-family: var(--font-mono);
   font-size: 0.8rem;
   letter-spacing: 0.1em;
@@ -155,8 +170,25 @@ a {
   transition: color var(--transition);
 }
 
+/* Linea che cresce sotto il link sull'hover.
+   Parte da width:0 e arriva a width:100% grazie alla transition. */
+.navbar__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-accent);
+  transition: width var(--transition);
+}
+
 .navbar__links a:hover {
   color: var(--color-text);
+}
+
+.navbar__links a:hover::after {
+  width: 100%;
 }
 
 
@@ -170,6 +202,7 @@ a {
    padding-top: 60px → compensa la navbar fixed.
 ============================================================ */
 .hero {
+  position: relative;        /* serve per il pseudo-elemento glow */
   height: 100svh;
   display: flex;
   align-items: center;
@@ -178,6 +211,28 @@ a {
   padding-right: var(--spacing-md);
   max-width: 1000px;
   margin: 0 auto;
+  overflow: hidden;
+}
+
+/* Glow decorativo dietro il nome.
+   radial-gradient crea un alone luminoso circolare.
+   pointer-events: none → non blocca i click dell'utente. */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: -5%;
+  width: 55%;
+  height: 55%;
+  background: radial-gradient(ellipse, rgba(83, 199, 212, 0.07) 0%, transparent 70%);
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;    /* sta sopra al glow */
 }
 
 .hero__greeting {
@@ -189,10 +244,13 @@ a {
 }
 
 .hero__name {
+  font-family: var(--font-display);   /* Playfair Display — più elegante */
   font-size: clamp(2.5rem, 6vw, 5rem);
-  font-weight: normal;
+  font-weight: 400;
+  font-style: italic;                 /* il corsivo di Playfair è raffinato */
   line-height: 1.1;
   margin-bottom: var(--spacing-xs);
+  letter-spacing: -0.01em;
 }
 
 /* clamp(min, preferito, max)
@@ -239,9 +297,16 @@ a {
 .skill-tag {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  padding: 0.3rem 0.7rem;
+  padding: 0.3rem 0.8rem;
   border: 1px solid var(--color-border);
   color: var(--color-text-muted);
+  border-radius: 999px;              /* pillola arrotondata */
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.skill-tag:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
 }
 
 
@@ -253,21 +318,28 @@ a {
   border-top: 1px solid var(--color-border);
 }
 
-/* Grid a 3 colonne. Su schermi piccoli diventa 1 colonna
-   grazie alle media query in fondo. */
+/* Grid a 2 colonne — più spazio per ogni card,
+   immagini più leggibili rispetto a 3 colonne strette. */
 .projects__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-md);
 }
 
 .project-card {
   border: 1px solid var(--color-border);
-  transition: border-color var(--transition);
+  /* Animiamo anche transform e box-shadow per l'effetto lift */
+  transition: border-color var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
 }
 
+/* Effetto lift: la card si solleva di 6px
+   e proietta un'ombra verso il basso */
 .project-card:hover {
   border-color: var(--color-accent);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
 }
 
 .project-card__image {
@@ -296,8 +368,9 @@ a {
 }
 
 .project-card__info h3 {
-  font-size: 1rem;
-  font-weight: normal;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 400;
   margin-bottom: var(--spacing-xs);
 }
 
